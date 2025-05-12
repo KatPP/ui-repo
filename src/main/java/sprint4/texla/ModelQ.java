@@ -1,10 +1,10 @@
-package sprint4.tesla;
+package sprint4.texla;
 
-public class ModelQ extends TexlaCar {
+class ModelQ extends Texla {
+
     public ModelQ() {
         speed = 0;
         maxSpeed = 300;
         acceleration = 100;
-        brakingSpeed = 120;
     }
 }
