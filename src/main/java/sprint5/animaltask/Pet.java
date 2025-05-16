@@ -1,4 +1,4 @@
-package sprint5;
+package sprint5.animaltask;
 
 public abstract class Pet {
     private int pawsCount = 4;

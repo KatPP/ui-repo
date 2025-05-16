@@ -1,4 +1,4 @@
-package sprint5;
+package sprint5.animaltask;
 
 public class Cat extends Pet {
 
