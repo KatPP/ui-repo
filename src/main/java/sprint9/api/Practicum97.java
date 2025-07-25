@@ -1,0 +1,40 @@
+package sprint9.api;
+
+import com.sun.net.httpserver.Headers;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+
+class HelloHandler implements HttpHandler {
+    @Override
+    public void handle(HttpExchange httpExchange) throws IOException {
+
+        // добавляем заголовки в ответ
+        Headers headers = httpExchange.getResponseHeaders();
+        headers.set("Content-Type", "text/plain; charset=utf-8");
+        headers.set("X-your-own-header", "any-information-you-want");
+        headers.set("X-your-own-header-2", "any-information-you-want-2");
+
+        // отправляем стартовую строку и настроенные заголовки ответа
+        httpExchange.sendResponseHeaders(200, 0);
+
+        try (OutputStream os = httpExchange.getResponseBody()) {
+            os.write("Привет! Рады видеть на нашем сервере.".getBytes());
+        }
+    }
+}
+
+public class Practicum97 {
+    private static final int PORT = 8080;
+
+    public static void main(String[] args) throws IOException {
+        HttpServer httpServer = HttpServer.create(new InetSocketAddress(PORT), 0);
+        httpServer.createContext("/hello", new HelloHandler());
+        httpServer.start();
+        System.out.println("HTTP-сервер запущен на " + PORT + " порту!");
+    }
+}
